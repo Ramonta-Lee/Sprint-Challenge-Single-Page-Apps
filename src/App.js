@@ -1,14 +1,16 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
+import { Route, Switch } from "react-router-dom";
 import Header from "./components/Header.js";
 import CharacterList from "./components/CharacterList";
 import SearchForm from "./components/SearchForm";
 import axios from "axios";
-
+import WelcomePage from "./components/WelcomePage.js";
+import LocationsList from "./components/LocationsList.js";
 
 export default function App() {
-
   const [characters, setCharacters] = useState([]);
   const [search, setSearch] = useState("");
+  const [location, setLocation] = useState([]);
 
   useEffect(() => {
     // TODO: Add API Request here - must run in `useEffect`
@@ -16,8 +18,9 @@ export default function App() {
       .get(`https://rickandmortyapi.com/api/character/?name=${search}`)
       .then(response => {
         console.log(response.data.results);
-        
-          setCharacters(response.data.results);
+
+        setCharacters(response.data.results);
+        setLocation(response.data.results.location);
       })
       .catch(error => console.log(error));
 
@@ -34,10 +37,21 @@ export default function App() {
   return (
     <main>
       <Header />
-      <SearchForm characters={characters} handleSearchChange={handleSearchChange} />
-      <div>
-      <CharacterList characters={characters} />
-      </div>
+      <SearchForm
+        characters={characters}
+        handleSearchChange={handleSearchChange}
+      />
+      <Switch>
+        <Route path="/characters">
+          <CharacterList characters={characters} />
+        </Route>
+        <Route path="/locations">
+          <LocationsList characters={characters} />
+        </Route>
+        <Route path="/">
+          <WelcomePage />
+        </Route>
+      </Switch>
     </main>
   );
 }
