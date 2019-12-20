@@ -10,7 +10,7 @@ import LocationsList from "./components/LocationsList.js";
 export default function App() {
   const [characters, setCharacters] = useState([]);
   const [search, setSearch] = useState("");
-  const [location, setLocation] = useState([]);
+  
 
   useEffect(() => {
     // TODO: Add API Request here - must run in `useEffect`
@@ -20,7 +20,7 @@ export default function App() {
         console.log(response.data.results);
 
         setCharacters(response.data.results);
-        setLocation(response.data.results.location);
+        
       })
       .catch(error => console.log(error));
 
@@ -49,7 +49,7 @@ export default function App() {
           <CharacterList characters={characters} />
         </Route>
         <Route path="/locations">
-          <LocationsList characters={characters} />
+          <LocationsList />
         </Route>
         <Route path="/">
           <WelcomePage />

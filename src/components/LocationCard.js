@@ -1,13 +1,15 @@
 import React from "react";
-import { Card, Button, CardTitle, CardText } from "reactstrap";
+import { Card, Button, CardTitle, CardSubtitle } from "reactstrap";
 
-export default function LocationCard({ name, type, dimension, residents }) {
+export default function LocationCard(props) {
+  console.log("name", props);
+  const { name, type, dimension, residents } = props.location;
+
   return (
     <Card body inverse color="primary">
-      <CardTitle>{name}</CardTitle>
-      <CardText>
-        With supporting text below as a natural lead-in to additional content.
-      </CardText>
+      <CardTitle>Name: {name}</CardTitle>
+      <CardSubtitle>Type: {type}</CardSubtitle>
+      <CardSubtitle>Dimension: {dimension}</CardSubtitle>
       <Button color="secondary">Button</Button>
     </Card>
   );
