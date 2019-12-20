@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
-import {Button} from "reactstrap";
+import { Button } from "reactstrap";
 
 export default function SearchForm(props) {
-
   // console.log("hello", props);
 
   return (
